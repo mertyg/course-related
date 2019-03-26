@@ -1,0 +1,901 @@
+Script started on Tue Nov 20 01:27:09 2018
+bash-3.2$ lldb bufserver
+(lldb) target create "bufserver"
+Current executable set to 'bufserver' (x86_64).
+(lldb) [1G[2m(lldb) [22m[8Gb set_u[K(lldb) b set_up_server_socket [1G[2m(lldb) [22m[31G
+Breakpoint 1: where = bufserver`set_up_server_socket + 27 at socket.c:36, address = 0x0000000100000a9b
+(lldb) [1G[2m(lldb) [22m[8Grn[K[1G[2m(lldb) [22m[9Gun
+Process 3109 launched: '/Users/merdo/Desktop/Fall2018/CSC209/Assignments/yuksekgo/Lab10/bufserver' (x86_64)
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x0000000100000a9b bufserver`set_up_server_socket(self=0x0000000100102cb0, num_queue=5) at socket.c:36
+   33  	 * Create and set up a socket for a server to listen on.
+   34  	 */
+   35  	int set_up_server_socket(struct sockaddr_in *self, int num_queue) {
+-> 36  	    int soc = [4ms[0mocket(PF_INET, SOCK_STREAM, 0);
+   37  	    if (soc < 0) {
+   38  	        perror("socket");
+   39  	        exit(1);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000aa7 bufserver`set_up_server_socket(self=0x0000000100102cb0, num_queue=5) at socket.c:37
+   34  	 */
+   35  	int set_up_server_socket(struct sockaddr_in *self, int num_queue) {
+   36  	    int soc = socket(PF_INET, SOCK_STREAM, 0);
+-> 37  	    if (soc [4m<[0m 0) {
+   38  	        perror("socket");
+   39  	        exit(1);
+   40  	    }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000ad5 bufserver`set_up_server_socket(self=0x0000000100102cb0, num_queue=5) at socket.c:44
+   41  	
+   42  	    // Make sure we can reuse the port immediately after the
+   43  	    // server terminates. Avoids the "address in use" error
+-> 44  	    int [4mo[0mn = 1;
+   45  	    int status = setsockopt(soc, SOL_SOCKET, SO_REUSEADDR,
+   46  	        (const char *) &on, sizeof(on));
+   47  	    if (status < 0) {
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000adc bufserver`set_up_server_socket(self=0x0000000100102cb0, num_queue=5) at socket.c:45
+   42  	    // Make sure we can reuse the port immediately after the
+   43  	    // server terminates. Avoids the "address in use" error
+   44  	    int on = 1;
+-> 45  	    int status = setsockopt([4ms[0moc, SOL_SOCKET, SO_REUSEADDR,
+   46  	        (const char *) &on, sizeof(on));
+   47  	    if (status < 0) {
+   48  	        perror("setsockopt");
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000aec bufserver`set_up_server_socket(self=0x0000000100102cb0, num_queue=5) at socket.c:47
+   44  	    int on = 1;
+   45  	    int status = setsockopt(soc, SOL_SOCKET, SO_REUSEADDR,
+   46  	        (const char *) &on, sizeof(on));
+-> 47  	    if (status [4m<[0m 0) {
+   48  	        perror("setsockopt");
+   49  	        exit(1);
+   50  	    }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000b11 bufserver`set_up_server_socket(self=0x0000000100102cb0, num_queue=5) at socket.c:53
+   50  	    }
+   51  	
+   52  	    // Associate the process with the address and a port
+-> 53  	    if (bind([4ms[0moc, (struct sockaddr *)self, sizeof(*self)) < 0) {
+   54  	        // bind failed; could be because port is in use.
+   55  	        perror("bind");
+   56  	        exit(1);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000b3f bufserver`set_up_server_socket(self=0x0000000100102cb0, num_queue=5) at socket.c:60
+   57  	    }
+   58  	
+   59  	    // Set up a queue in the kernel to hold pending connections.
+-> 60  	    if (listen([4ms[0moc, num_queue) < 0) {
+   61  	        // listen failed
+   62  	        perror("listen");
+   63  	        exit(1);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000b69 bufserver`set_up_server_socket(self=0x0000000100102cb0, num_queue=5) at socket.c:66
+   63  	        exit(1);
+   64  	    }
+   65  	
+-> 66  	    return [4ms[0moc;
+   67  	}
+   68  	
+   69  	
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000821 bufserver`main at bufserver.c:24
+   21  	    setbuf(stdout, NULL);
+   22  	
+   23  	    struct sockaddr_in *self = init_server_addr(PORT);
+-> 24  	    int [4ml[0mistenfd = set_up_server_socket(self, 5);
+   25  	
+   26  	    while (1) {
+   27  	        int fd = accept_connection(listenfd);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000824 bufserver`main at bufserver.c:27
+   24  	    int listenfd = set_up_server_socket(self, 5);
+   25  	
+   26  	    while (1) {
+-> 27  	        int fd = accept_connection([4ml[0mistenfd);
+   28  	        if (fd < 0) {
+   29  	            continue;
+   30  	        }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Waiting for a new connection...
+New connection accepted from 127.0.0.1:51222
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000082f bufserver`main at bufserver.c:28
+   25  	
+   26  	    while (1) {
+   27  	        int fd = accept_connection(listenfd);
+-> 28  	        if (fd [4m<[0m 0) {
+   29  	            continue;
+   30  	        }
+   31  	
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000084b bufserver`main at bufserver.c:33
+   30  	        }
+   31  	
+   32  	        // Receive messages
+-> 33  	        char [4mb[0muf[BUFSIZE] = {'\0'};
+   34  	        int inbuf = 0;           // How many bytes currently in buffer?
+   35  	        int room = sizeof(buf);  // How many bytes remaining in buffer?
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000857 bufserver`main at bufserver.c:34
+   31  	
+   32  	        // Receive messages
+   33  	        char buf[BUFSIZE] = {'\0'};
+-> 34  	        int [4mi[0mnbuf = 0;           // How many bytes currently in buffer?
+   35  	        int room = sizeof(buf);  // How many bytes remaining in buffer?
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+   37  	
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000085e bufserver`main at bufserver.c:35
+   32  	        // Receive messages
+   33  	        char buf[BUFSIZE] = {'\0'};
+   34  	        int inbuf = 0;           // How many bytes currently in buffer?
+-> 35  	        int [4mr[0moom = sizeof(buf);  // How many bytes remaining in buffer?
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+   37  	
+   38  	        int nbytes;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000865 bufserver`main at bufserver.c:36
+   33  	        char buf[BUFSIZE] = {'\0'};
+   34  	        int inbuf = 0;           // How many bytes currently in buffer?
+   35  	        int room = sizeof(buf);  // How many bytes remaining in buffer?
+-> 36  	        char *[4ma[0mfter = buf;       // Pointer to position after the data in buf
+   37  	
+   38  	        int nbytes;
+   39  	        while ((nbytes = read(fd, after, room)) > 0) {
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000086d bufserver`main at bufserver.c:39
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+   37  	
+   38  	        int nbytes;
+-> 39  	        while ((nbytes = read([4mf[0md, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+   41  	            inbuf+=nbytes;
+   42  	            int where;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000088b bufserver`main at bufserver.c:41
+   38  	        int nbytes;
+   39  	        while ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+-> 41  	            inbuf+=[4mn[0mbytes;
+   42  	            int where;
+   43  	
+   44  	            // Step 2: the loop condition below calls find_network_newline
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000898 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            while ((where = find_network_newline(buf, [4mi[0mnbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8G
+[JAvailable completions:
+	_regexp-attach
+	_regexp-break
+	_regexp-bt
+	_regexp-display
+	_regexp-down
+	_regexp-env
+	_regexp-jump
+	_regexp-list
+	_regexp-tbreak
+	_regexp-undisplay
+	_regexp-up
+	apropos
+	breakpoint
+	bugreport
+	command
+	disassemble
+	expression
+	frame
+	gdb-remote
+	gui
+	help
+	kdp-remote
+	language
+	log
+	memory
+	platform
+	plugin
+	process
+	quit
+	register
+	script
+	settings
+	source
+	statistics
+	target
+	thread
+	type
+	version
+	watchpoint
+	add-dsym
+More (Y/n/a): [1G[J[2m(lldb) [22m [8G[K(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008b7 bufserver`main at bufserver.c:57
+   54  	                // using print statement below.
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+-> 57  	                buf[[4mw[0mhere-2]='\0';
+   58  	                printf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008c5 bufserver`main at bufserver.c:58
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+   57  	                buf[where-2]='\0';
+-> 58  	                [4mp[0mrintf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+   61  	
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Next message: A stitch in time
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008dc bufserver`main at bufserver.c:64
+   61  	
+   62  	                // Step 4: update inbuf and remove the full line from the buffer
+   63  	                // There might be stuff after the line, so don't just do inbuf = 0.
+-> 64  	                inbuf-=[4mw[0mhere;
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008eb bufserver`main at bufserver.c:68
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+-> 68  	                [4mm[0memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000909 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            [4mw[0mhile ((where = find_network_newline(buf, inbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000091b bufserver`main at bufserver.c:71
+   68  	                memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+-> 71  	            after=buf[4m+[0minbuf;
+   72  	            room = BUFSIZE-inbuf;
+   73  	
+   74  	        }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000926 bufserver`main at bufserver.c:72
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+-> 72  	            room = BUFSIZE[4m-[0minbuf;
+   73  	
+   74  	        }
+   75  	        close(fd);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000092c bufserver`main at bufserver.c:39
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+   37  	
+   38  	        int nbytes;
+-> 39  	        [4mw[0mhile ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+   41  	            inbuf+=nbytes;
+   42  	            int where;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000088b bufserver`main at bufserver.c:41
+   38  	        int nbytes;
+   39  	        while ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+-> 41  	            inbuf+=[4mn[0mbytes;
+   42  	            int where;
+   43  	
+   44  	            // Step 2: the loop condition below calls find_network_newline
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000898 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            while ((where = find_network_newline(buf, [4mi[0mnbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008b7 bufserver`main at bufserver.c:57
+   54  	                // using print statement below.
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+-> 57  	                buf[[4mw[0mhere-2]='\0';
+   58  	                printf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008c5 bufserver`main at bufserver.c:58
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+   57  	                buf[where-2]='\0';
+-> 58  	                [4mp[0mrintf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+   61  	
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Next message: A stitch in time
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008dc bufserver`main at bufserver.c:64
+   61  	
+   62  	                // Step 4: update inbuf and remove the full line from the buffer
+   63  	                // There might be stuff after the line, so don't just do inbuf = 0.
+-> 64  	                inbuf-=[4mw[0mhere;
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008eb bufserver`main at bufserver.c:68
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+-> 68  	                [4mm[0memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000909 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            [4mw[0mhile ((where = find_network_newline(buf, inbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000091b bufserver`main at bufserver.c:71
+   68  	                memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+-> 71  	            after=buf[4m+[0minbuf;
+   72  	            room = BUFSIZE-inbuf;
+   73  	
+   74  	        }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000926 bufserver`main at bufserver.c:72
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+-> 72  	            room = BUFSIZE[4m-[0minbuf;
+   73  	
+   74  	        }
+   75  	        close(fd);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000092c bufserver`main at bufserver.c:39
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+   37  	
+   38  	        int nbytes;
+-> 39  	        [4mw[0mhile ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+   41  	            inbuf+=nbytes;
+   42  	            int where;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000088b bufserver`main at bufserver.c:41
+   38  	        int nbytes;
+   39  	        while ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+-> 41  	            inbuf+=[4mn[0mbytes;
+   42  	            int where;
+   43  	
+   44  	            // Step 2: the loop condition below calls find_network_newline
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000898 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            while ((where = find_network_newline(buf, [4mi[0mnbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008b7 bufserver`main at bufserver.c:57
+   54  	                // using print statement below.
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+-> 57  	                buf[[4mw[0mhere-2]='\0';
+   58  	                printf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008c5 bufserver`main at bufserver.c:58
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+   57  	                buf[where-2]='\0';
+-> 58  	                [4mp[0mrintf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+   61  	
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Next message: A stitch in time
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008dc bufserver`main at bufserver.c:64
+   61  	
+   62  	                // Step 4: update inbuf and remove the full line from the buffer
+   63  	                // There might be stuff after the line, so don't just do inbuf = 0.
+-> 64  	                inbuf-=[4mw[0mhere;
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008eb bufserver`main at bufserver.c:68
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+-> 68  	                [4mm[0memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000909 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            [4mw[0mhile ((where = find_network_newline(buf, inbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000091b bufserver`main at bufserver.c:71
+   68  	                memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+-> 71  	            after=buf[4m+[0minbuf;
+   72  	            room = BUFSIZE-inbuf;
+   73  	
+   74  	        }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000926 bufserver`main at bufserver.c:72
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+-> 72  	            room = BUFSIZE[4m-[0minbuf;
+   73  	
+   74  	        }
+   75  	        close(fd);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000092c bufserver`main at bufserver.c:39
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+   37  	
+   38  	        int nbytes;
+-> 39  	        [4mw[0mhile ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+   41  	            inbuf+=nbytes;
+   42  	            int where;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000088b bufserver`main at bufserver.c:41
+   38  	        int nbytes;
+   39  	        while ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+-> 41  	            inbuf+=[4mn[0mbytes;
+   42  	            int where;
+   43  	
+   44  	            // Step 2: the loop condition below calls find_network_newline
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000898 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            while ((where = find_network_newline(buf, [4mi[0mnbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008b7 bufserver`main at bufserver.c:57
+   54  	                // using print statement below.
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+-> 57  	                buf[[4mw[0mhere-2]='\0';
+   58  	                printf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008c5 bufserver`main at bufserver.c:58
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+   57  	                buf[where-2]='\0';
+-> 58  	                [4mp[0mrintf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+   61  	
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Next message: A stitch in time
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008dc bufserver`main at bufserver.c:64
+   61  	
+   62  	                // Step 4: update inbuf and remove the full line from the buffer
+   63  	                // There might be stuff after the line, so don't just do inbuf = 0.
+-> 64  	                inbuf-=[4mw[0mhere;
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008eb bufserver`main at bufserver.c:68
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+-> 68  	                [4mm[0memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000909 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            [4mw[0mhile ((where = find_network_newline(buf, inbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000091b bufserver`main at bufserver.c:71
+   68  	                memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+-> 71  	            after=buf[4m+[0minbuf;
+   72  	            room = BUFSIZE-inbuf;
+   73  	
+   74  	        }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000926 bufserver`main at bufserver.c:72
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+-> 72  	            room = BUFSIZE[4m-[0minbuf;
+   73  	
+   74  	        }
+   75  	        close(fd);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000092c bufserver`main at bufserver.c:39
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+   37  	
+   38  	        int nbytes;
+-> 39  	        [4mw[0mhile ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+   41  	            inbuf+=nbytes;
+   42  	            int where;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000088b bufserver`main at bufserver.c:41
+   38  	        int nbytes;
+   39  	        while ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+-> 41  	            inbuf+=[4mn[0mbytes;
+   42  	            int where;
+   43  	
+   44  	            // Step 2: the loop condition below calls find_network_newline
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000898 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            while ((where = find_network_newline(buf, [4mi[0mnbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008b7 bufserver`main at bufserver.c:57
+   54  	                // using print statement below.
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+-> 57  	                buf[[4mw[0mhere-2]='\0';
+   58  	                printf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008c5 bufserver`main at bufserver.c:58
+   55  	                // Be sure to put a '\0' in the correct place first;
+   56  	                // otherwise you'll get junk in the output.
+   57  	                buf[where-2]='\0';
+-> 58  	                [4mp[0mrintf("Next message: %s\n", buf);
+   59  	                // Note that we could have also used write to avoid having to
+   60  	                // put the '\0' in the buffer. Try using write later!
+   61  	
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Next message: A stitch in time
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008dc bufserver`main at bufserver.c:64
+   61  	
+   62  	                // Step 4: update inbuf and remove the full line from the buffer
+   63  	                // There might be stuff after the line, so don't just do inbuf = 0.
+-> 64  	                inbuf-=[4mw[0mhere;
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000008eb bufserver`main at bufserver.c:68
+   65  	                // You want to move the stuff after the full line to the beginning
+   66  	                // of the buffer.  A loop can do it, or you can use memmove.
+   67  	                // memmove(destination, source, number_of_bytes)
+-> 68  	                [4mm[0memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000909 bufserver`main at bufserver.c:51
+   48  	            //
+   49  	            // Note: we use a loop here because a single read might result in
+   50  	            // more than one full line.
+-> 51  	            [4mw[0mhile ((where = find_network_newline(buf, inbuf)) > 0) {
+   52  	                // Step 3: Okay, we have a full line.
+   53  	                // Output the full line, not including the "\r\n",
+   54  	                // using print statement below.
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000091b bufserver`main at bufserver.c:71
+   68  	                memmove(buf,buf+where,BUFSIZE-where);
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+-> 71  	            after=buf[4m+[0minbuf;
+   72  	            room = BUFSIZE-inbuf;
+   73  	
+   74  	        }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000926 bufserver`main at bufserver.c:72
+   69  	            }
+   70  	            // Step 5: update after and room, in preparation for the next read.
+   71  	            after=buf+inbuf;
+-> 72  	            room = BUFSIZE[4m-[0minbuf;
+   73  	
+   74  	        }
+   75  	        close(fd);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000092c bufserver`main at bufserver.c:39
+   36  	        char *after = buf;       // Pointer to position after the data in buf
+   37  	
+   38  	        int nbytes;
+-> 39  	        [4mw[0mhile ((nbytes = read(fd, after, room)) > 0) {
+   40  	            // Step 1: update inbuf (how many bytes were just added?)
+   41  	            inbuf+=nbytes;
+   42  	            int where;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000931 bufserver`main at bufserver.c:75
+   72  	            room = BUFSIZE-inbuf;
+   73  	
+   74  	        }
+-> 75  	        close([4mf[0md);
+   76  	    }
+   77  	
+   78  	    free(self);
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000939 bufserver`main at bufserver.c:26
+   23  	    struct sockaddr_in *self = init_server_addr(PORT);
+   24  	    int listenfd = set_up_server_socket(self, 5);
+   25  	
+-> 26  	    [4mw[0mhile (1) {
+   27  	        int fd = accept_connection(listenfd);
+   28  	        if (fd < 0) {
+   29  	            continue;
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000824 bufserver`main at bufserver.c:27
+   24  	    int listenfd = set_up_server_socket(self, 5);
+   25  	
+   26  	    while (1) {
+-> 27  	        int fd = accept_connection([4ml[0mistenfd);
+   28  	        if (fd < 0) {
+   29  	            continue;
+   30  	        }
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gn
+Waiting for a new connection...
+	Process 3109 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = signal SIGSTOP
+    frame #0: 0x00007fff7abb2ece libsystem_kernel.dylib`__accept + 10
+libsystem_kernel.dylib`__accept:
+->  0x7fff7abb2ece <+10>: jae    0x7fff7abb2ed8            ; <+20>
+    0x7fff7abb2ed0 <+12>: movq   %rax, %rdi
+    0x7fff7abb2ed3 <+15>: jmp    0x7fff7abaab0e            ; cerror
+    0x7fff7abb2ed8 <+20>: retq   
+Target 0: (bufserver) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gexit
+Quitting LLDB will kill one or more processes. Do you really want to proceed: [Y/n] y
+bash-3.2$ exit
+exit
+
+Script done on Tue Nov 20 01:29:50 2018

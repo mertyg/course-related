@@ -1,0 +1,221 @@
+Script started on Mon Oct 15 19:53:45 2018
+bash-3.2$ lldb overl[D[Kflow
+(lldb) target create "overflow"
+Current executable set to 'overflow' (x86_64).
+(lldb) [1G[2m(lldb) [22m[8Gb[K[1G[2m(lldb) [22m[8Gl 35
+   35  	
+   36  	    for (i = 0; i < OVERFLOW; i++) {
+   37  	        a[i] = i * 10;
+   38  	        printf("i = %d\n", i);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+   41  	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+   42  	    }
+   43  	
+   44  	    return 0;
+(lldb) [1G[2m(lldb) [22m[8Ge[K[1G[2m(lldb) [22m[8Gb 36
+Breakpoint 1: where = overflow`main + 542 at overflow.c:36, address = 0x0000000100000dae
+(lldb) [1G[2m(lldb) [22m[8Gb 38
+Breakpoint 2: where = overflow`main + 584 at overflow.c:38, address = 0x0000000100000dd8
+(lldb) [1G[2m(lldb) [22m[8Grn[K[1G[2m(lldb) [22m[9Gun
+diProcess 3419 launched: '/Users/merdo/Desktop/Fall2018/CSC209/Assignments/yuksekgo/Lab6/overflow' (x86_64)
+disAddress of the variables:
+7ffeefbffa30 -> &after[0]
+7ffeefbffa34 -> &after[1]
+7ffeefbffa38 -> &after[2]
+7ffeefbffa3c -> &after[3]
+7ffeefbffa40 -> &a[0]
+7ffeefbffa44 -> &a[1]
+7ffeefbffa48 -> &a[2]
+7ffeefbffa4c -> &a[3]
+7ffeefbffa50 -> &before[0]
+7ffeefbffa54 -> &before[1]
+7ffeefbffa58 -> &before[2]
+7ffeefbffa5c -> &before[3]
+7ffeefbffa24 -> &i
+7ffeefbffa28 -> &index
+
+Initial values:
+i = 1
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x0000000100000dae overflow`main at overflow.c:36
+   33  	    printf("\n");
+   34  	
+   35  	
+-> 36  	    for (i [4m=[0m 0; i < OVERFLOW; i++) {
+   37  	        a[i] = i * 10;
+   38  	        printf("i = %d\n", i);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gpl[K[1G[2m(lldb) [22m[9G[K[1G[2m(lldb) [22m[8Gdisplay after
+Stop hook #1 added.
+(lldb) [1G[2m(lldb) [22m[8Gcontinue
+Process 3419 resuming
+(lldb) [1G[2m(lldb) [22m[8G[1G[J(int [4]) $0 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+[1G[J[2m(lldb) [22m [8G[1G[JProcess 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x0000000100000dd8 overflow`main at overflow.c:38
+   35  	
+   36  	    for (i = 0; i < OVERFLOW; i++) {
+   37  	        a[i] = i * 10;
+-> 38  	        printf("i = %d\n", [4mi[0m);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+   41  	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+Target 0: (overflow) stopped.
+[1G[J[2m(lldb) [22m [8Gcontinue
+Process 3419 resuming
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+(int [4]) $1 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x0000000100000dd8 overflow`main at overflow.c:38
+   35  	
+   36  	    for (i = 0; i < OVERFLOW; i++) {
+   37  	        a[i] = i * 10;
+-> 38  	        printf("i = %d\n", [4mi[0m);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+   41  	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gprint &(after[0])
+(int *) $2 = 0x00007ffeefbffa30
+(lldb) [1G[2m(lldb) [22m[8Gprint &(after[0])[1G[2m(lldb) [22m[25G[0])[K[1G[2m(lldb) [22m[22G4])[1G[2m(lldb) [22m[23G[4])[K[1G[2m(lldb) [22m[20G[4])[K[1G[2m(lldb) [22m[19G[4])[K[1G[2m(lldb) [22m[18G[4])[K[1G[2m(lldb) [22m[17G[4])[K[1G[2m(lldb) [22m[16G[a[4])[1G[2m(lldb) [22m[17G[4])
+(int *) $3 = 0x00007ffeefbffa50
+(lldb) [1G[2m(lldb) [22m[8Gnext
+i = 1
+(int [4]) $4 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000de9 overflow`main at overflow.c:39
+   36  	    for (i = 0; i < OVERFLOW; i++) {
+   37  	        a[i] = i * 10;
+   38  	        printf("i = %d\n", i);
+-> 39  	        printf("before = {%d, %d, %d, %d}\n", [4mb[0mefore[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+   41  	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+   42  	    }
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gnext
+before = {10, 10, 10, 10}
+(int [4]) $5 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000e0a overflow`main at overflow.c:40
+   37  	        a[i] = i * 10;
+   38  	        printf("i = %d\n", i);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+-> 40  	        printf("a = {%d, %d, %d, %d}\n", [4ma[0m[0], a[1], a[2], a[3]);
+   41  	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+   42  	    }
+   43  	
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gnext
+a = {0, 10, 0, 0}
+(int [4]) $6 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000e2b overflow`main at overflow.c:41
+   38  	        printf("i = %d\n", i);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+-> 41  	        printf("after = {%d, %d, %d, %d}\n", [4ma[0mfter[0], after[1], after[2], after[3]);
+   42  	    }
+   43  	
+   44  	    return 0;
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gnext
+after = {10, 10, 10, 10}
+(int [4]) $7 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000e4b overflow`main at overflow.c:36
+   33  	    printf("\n");
+   34  	
+   35  	
+-> 36  	    for (i = 0; i < OVERFLOW; i[4m+[0m+) {
+   37  	        a[i] = i * 10;
+   38  	        printf("i = %d\n", i);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gnext
+(int [4]) $8 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000dcc overflow`main at overflow.c:37
+   34  	
+   35  	
+   36  	    for (i = 0; i < OVERFLOW; i++) {
+-> 37  	        a[i] = i [4m*[0m 10;
+   38  	        printf("i = %d\n", i);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gnext
+(int [4]) $9 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x0000000100000dd8 overflow`main at overflow.c:38
+   35  	
+   36  	    for (i = 0; i < OVERFLOW; i++) {
+   37  	        a[i] = i * 10;
+-> 38  	        printf("i = %d\n", [4mi[0m);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+   41  	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gnext
+i = 2
+(int [4]) $10 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000de9 overflow`main at overflow.c:39
+   36  	    for (i = 0; i < OVERFLOW; i++) {
+   37  	        a[i] = i * 10;
+   38  	        printf("i = %d\n", i);
+-> 39  	        printf("before = {%d, %d, %d, %d}\n", [4mb[0mefore[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+   41  	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+   42  	    }
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Gcontinue
+Process 3419 resuming
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 0}
+after = {10, 10, 10, 10}
+(int [4]) $11 = ([0] = 10, [1] = 10, [2] = 10, [3] = 10)
+
+Process 3419 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x0000000100000dd8 overflow`main at overflow.c:38
+   35  	
+   36  	    for (i = 0; i < OVERFLOW; i++) {
+   37  	        a[i] = i * 10;
+-> 38  	        printf("i = %d\n", [4mi[0m);
+   39  	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+   40  	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+   41  	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+Target 0: (overflow) stopped.
+(lldb) [1G[2m(lldb) [22m[8Ge[K[1G[2m(lldb) [22m[8Gquiot[K[1G[2m(lldb) [22m[12G[K[1G[2m(lldb) [22m[11Gt
+Quitting LLDB will kill one or more processes. Do you really want to proceed: [Y/n] y
+bash-3.2$ exit
+exit
+
+Script done on Mon Oct 15 19:55:03 2018
