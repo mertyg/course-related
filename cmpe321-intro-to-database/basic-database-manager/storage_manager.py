@@ -5,33 +5,36 @@ from ddl import create_type, delete_type, list_type
 from dml import create_record, search_record, update_record, delete_record, list_record
 MAX_FIELDS = 8
 PAGESIZE = 1024
+FILEPAGES = 8
+
 
 def handle_operation(op, params):
-    if op=="create_type":
+    if op == "create_type":
         create_type(params)
 
-    elif op=="delete_type":
+    elif op == "delete_type":
         delete_type(params)
 
-    elif op=="list_type":
+    elif op == "list_type":
         list_type(params)
 
-    elif op=="create_record":
+    elif op == "create_record":
         create_record(params)
 
-    elif op=="delete_record":
+    elif op == "delete_record":
         delete_record(params)
 
-    elif op=="update_record":
+    elif op == "update_record":
         update_record(params)
 
-    elif op=="search_record":
+    elif op == "search_record":
         search_record(params)
 
-    elif op=="list_record":
+    elif op == "list_record":
         list_record(params)
 
-    else: print("Invalid operation",op.split("_"))
+    else:
+        print("Invalid operation", op.split("_"))
 
 
 def init_db():
@@ -45,11 +48,13 @@ def init_db():
     f.write(struct.pack("i", 0))
     f.close()
 
+
 def check_syscat():
     file = open("syscat", "r+b")
     print("DB ID:", struct.unpack("i", file.read(4))[0])
-    print("Type Count ",struct.unpack("i", file.read(4))[0])
+    print("Type Count ", struct.unpack("i", file.read(4))[0])
     file.close()
+
 
 if __name__ == '__main__':
     init_db()
@@ -58,11 +63,9 @@ if __name__ == '__main__':
 
     inp = open(in_file, "r")
     for line in inp:
-        tokens = line.split()
+        tokens = line.strip().split()
         operation = "_".join(tokens[:2])
         tokens.append(out_file)
         handle_operation(operation, tokens[2:])
     # DONT FORGET TO REMOVE THIS
     #os.remove("syscat")
-
-
