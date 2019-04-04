@@ -60,7 +60,8 @@ if __name__ == '__main__':
     init_db()
     in_file = sys.argv[1]
     out_file = sys.argv[2]
-
+    outf = open(out_file, "wb")
+    outf.close()
     inp = open(in_file, "r")
     for line in inp:
         tokens = line.strip().split()

@@ -9,6 +9,7 @@ FILEPAGES = 8
 
 def get_n_fields(tname):
     syscat = open("syscat", "rb")
+    n_fields = 0
     #DatabaseID and N_Types
     syscat.seek(8, 0)
     name = syscat.read(8)
@@ -68,10 +69,12 @@ def create_record(params):
                     #preparing the record to write
                     format_list = ["i" for _ in range(f_size)]
                     format_list.insert(0, "1s")
+                    format_list.insert(0, ">")
                     format_str = "".join(format_list)
                     fields = params[1:-1]
                     fields = [int(f) for f in fields]
                     fields.insert(0, b"F")
+                    #print(fields)
                     record = struct.pack(format_str, *fields)
                     #preparing the modified page
                     if filepos == 0:
@@ -220,9 +223,9 @@ def list_record(params):
         file.close()
         outfile = open(params[-1], "r+")
         outfile.seek(0, 2)
-        record_list = sorted(record_list, key=lambda x: x[0])
-        for record in record_list:
-            outfile.write(" ".join(record))
+        record_list = sorted(record_list, key=lambda x: int(x[0]))
+        for i in range(len(record_list)):
+            outfile.write(" ".join(record_list[i]).strip())
             outfile.write("\n")
         outfile.close()
 
@@ -270,13 +273,14 @@ def search_record(params, write_out=True):
                         if not write_out:
                             file.close()
                             return filename, pageno, page_pos - r_size
-                        for _ in range(n_fields):
+                        for i in range(n_fields):
                             #idk why, big endian works. check back later.
                             field = struct.unpack(">i",
                                                   record[r_pos:r_pos + 4])[0]
                             r_pos += 4
                             outfile.write(str(field))
-                            outfile.write(" ")
+                            if i != n_fields - 1:
+                                outfile.write(" ")
                         outfile.write("\n")
                         file.close()
                         outfile.close()
@@ -305,6 +309,7 @@ def update_record(params):
     page = file.read(PAGESIZE)
     format_list = ["i" for _ in range(n_fields)]
     format_list.insert(0, "1s")
+    format_list.insert(0, ">")
     format_str = "".join(format_list)
     fields = params[1:-1]
     fields = [int(f) for f in fields]

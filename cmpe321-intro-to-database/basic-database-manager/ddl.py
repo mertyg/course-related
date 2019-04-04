@@ -36,7 +36,6 @@ def create_type(params):
         f_name = "{:8s}".format("")
         syscat.write(struct.pack("8s", bytes(f_name, "utf-8")))
     syscat.close()
-    #create_file(t_name.strip()+"_file_1", params[1])
 
 
 def create_file(filename, n_fields):
@@ -102,14 +101,14 @@ def delete_type(params):
     syscat = open("syscat", "r+b")
     syscat.read(4)
     types = struct.unpack("i", syscat.read(4))[0]
-    syscat.seek(4, 0)
-    syscat.write(struct.pack("i", types - 1))
     syscat.seek(8, 0)
     name = syscat.read(8)
     while name != b'':
         name = struct.unpack("8s", name)[0].strip().decode("utf-8")
         if name == type_to_delete:
             syscat.write(struct.pack("1s", b"0"))
+            syscat.seek(4, 0)
+            syscat.write(struct.pack("i", types - 1))
             syscat.close()
             break
         #is_alive information
@@ -118,6 +117,7 @@ def delete_type(params):
         syscat.read(4)
         syscat.read(MAX_FIELDS * 8)
         name = syscat.read(8)
+    syscat.close()
 
 
 def list_type(params):
@@ -132,13 +132,8 @@ def list_type(params):
     while name != b"":
         name = struct.unpack("8s", name)[0].strip().decode("utf-8")
         is_alive = struct.unpack("1s", syscat.read(1))[0].decode("utf-8")
-        if is_alive == "0":
-            #N_fields
-            syscat.seek(4, 1)
-            syscat.seek(MAX_FIELDS * 8, 1)
-            name = syscat.read(8)
-            continue
-        types.append(name)
+        if is_alive == "1":
+            types.append(name)
         syscat.seek(4, 1)
         syscat.seek(MAX_FIELDS * 8, 1)
         name = syscat.read(8)
