@@ -1,0 +1,62 @@
+<html>
+<head>
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+  <body>
+    <h1>{{title}}</h1>
+    <table>
+        <tr>
+            <td>
+                PaperID
+            </td>
+            <td>
+                Title
+            </td>
+            <td>
+                Abstract
+            </td>
+            <td>
+                Result
+            </td>
+            <td>
+                Topics
+            </td>
+            <td>
+                Authors
+            </td>
+
+        </tr>
+      {% for paper in papers %}
+        <tr>
+            <td>
+                {{paper[0]}}
+            </td>
+          <td>
+            {{paper[1]}}
+          </td>
+          <td>
+            {{paper[2]}}
+        </td>
+        <td>
+            {{paper[3]}}
+        </td>
+        <td>
+            {{paper[4]}}
+        </td>
+        <td>
+            {{paper[5]}}
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+        <td>
+    <form method="GET" action="/user/home">
+      <input type="submit" value="Back to homepage">
+    </form>
+    </td>
+  </body>
+</html>

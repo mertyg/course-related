@@ -1,0 +1,128 @@
+<html>
+<head>
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+  <body>
+    <h1>All Papers</h1>
+    <table>
+        <tr>
+            <td>
+                PaperID
+            </td>
+            <td>
+                Title
+            </td>
+            <td>
+                Abstract
+            </td>
+            <td>
+                Result
+            </td>
+            <td>
+                Topics
+            </td>
+            <td>
+                Authors
+            </td>
+
+        </tr>
+      {% for paper in papers %}
+        <tr>
+            <td>
+                {{paper[0]}}
+            </td>
+          <td>
+            {{paper[1]}}
+          </td>
+          <td>
+            {{paper[2]}}
+        </td>
+        <td>
+            {{paper[3]}}
+        </td>
+        <td>
+            {{paper[4]}}
+        </td>
+        <td>
+            {{paper[5]}}
+        </td>
+        <td>
+        <form method="POST" action="/admin/papers">
+            <input type="hidden" name="type" value=DELETE>
+            <input type="hidden" name="paper_id" value="{{paper[0]}}">
+            <input type="submit" value="Delete Paper">
+    </form>
+        </td>
+        </tr>
+        <tr>
+            <form method="POST" action="/admin/papers">
+            <input type="hidden" name="type" value=UPDATE>
+            <input type="hidden" name="paper_id" value="{{paper[0]}}">
+            <input type="hidden" name="current_result" value="{{paper[3]}}">
+            <td>
+                Update {{paper[0]}}
+            </td>
+          <td>
+            <input type="text" name = "title">
+          </td>
+          <td>
+            <input type="text" name = "abstract">
+        </td>
+        <td>
+            <input type="text" name = "result">
+        </td>
+        <td>
+            <input type="text" name = "topics">
+        </td>
+        <td>
+            <input type="text" name = "authors">
+        </td>
+        <td>
+            <input type="submit" value="Update Paper">
+    </form>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+    Also, please don't forget to seperate name and surname of authors by at(@)and multiple authors by comma(,)
+    <h1>Add a Paper</h1>
+<form method="POST" action="/admin/papers">
+  <table>
+    <tr>
+      <td align="right">Title: </td>
+      <td align="left"><input type="text" required name = "title"></td>
+    </tr>
+    <tr>
+      <td align="right">Abstract: </td>
+      <td align="left"><textarea name="abstract" cols="40" rows="5"></textarea></td>
+    </tr>
+    <tr>
+      <td align="right">Authors. Please seperate name and surname <br> by at(@)and multiple authors by comma(,) </td>
+      <td align="left"><input type="text" required name = "authors"></td>
+    </tr>
+    <tr>
+      <td align="right">Topics, seperated by commas: </td>
+      <td align="left"><input type="text" required name = "topics"></td>
+    </tr>
+    <tr>
+      <td align="right">Result: </td>
+      <td align="left"><input type="number" required name="result" min="0" value="0" step=".001"></td>
+    </tr>
+    <tr>
+        <td align="right">All required</td>
+        <td align="left"><input type="submit" value="Add"></td>
+    </tr>
+  </table>
+</form>
+
+    <td>
+    <form method="GET" action="/admin/home">
+      <input type="submit" value="Back to homepage">
+    </form>
+    </td>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<html>
+<head>
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+  <body>
+    <h1>Existing Authors</h1>
+<table>
+        <tr>
+            <td>
+                AuthorID
+            </td>
+            <td>
+                First Name
+            </td>
+            <td>
+                Last Name
+            </td>
+        </tr>
+      {% for author in authors %}
+        <tr>
+            <td>
+                {{author[0]}}
+            </td>
+          <td>
+            {{author[1]}}
+          </td>
+          <td>
+            {{author[2]}}
+        </td>
+        <td>
+        <form method="POST" action="/admin/authors">
+            <input type="hidden" name="type" value=DELETE>
+      <input type="hidden" name="author_id" value="{{author[0]}}">
+      <input type="submit" value="Delete Author">
+    </form>
+        </td>
+        <td>
+        <form method="POST" action="/user/authors">
+      <input type="hidden" name="type" value="coauthor">
+      <input type="hidden" name="first_name" value="{{author[1]}}">
+      <input type="hidden" name="last_name" value="{{author[2]}}">
+      <input type="submit" value="View Coauthors">
+    </form>
+        </td>
+        </tr>
+        <tr>
+            <form method="POST" action="/admin/authors">
+                <input type="hidden" name="type" value=UPDATE>
+                <input type="hidden" name="author_id" value="{{author[0]}}">
+            <td>
+                Update {{author[0]}}
+            </td>
+          <td>
+            <input type="text" name = "first_name">
+          </td>
+          <td>
+            <input type="text" name = "last_name">
+        </td>
+        <td>
+            <input type="submit" value="Update Author">
+    </form>
+        </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    <h1>Add an author</h1>
+<form method="POST" action="/admin/authors">
+  <table>
+    <tr>
+      <td align="right">First Name: </td>
+      <td align="left"><input type="text" required name = "first_name"></td>
+    </tr>
+    <tr>
+      <td align="right">Last Name: </td>
+      <td align="left"><input type="text" required name = "last_name"></td>
+    </tr>
+    <tr>
+        <td align="right">All required</td>
+        <td align="left"><input type="submit" value="Add"></td>
+    </tr>
+  </table>
+</form>
+
+    <td>
+    <form method="GET" action="/admin/home">
+      <input type="submit" value="Back to homepage">
+    </form>
+    </td>
+  </body>
+</html>

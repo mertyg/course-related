@@ -1,0 +1,60 @@
+<html>
+  <body>
+    <h1>{{user}} Homepage</h1>
+    <tr>
+        <td>
+    <form method="GET" action="/user/topics">
+      <input type="submit" value="Display Topics">
+    </form>
+</td>
+        <td>
+    <form method="GET" action="/user/authors">
+      <input type="submit" value="Display Authors">
+    </form>
+    </td>
+            <td>
+    <form method="GET" action="/user/papers">
+      <input type="submit" value="Display Papers">
+    </form>
+    </td>
+    <td>
+    <form method="GET" action="/user/search_keyword">
+      <input type="submit" value="Search for keywords">
+    </form>
+    </td>
+    <td>
+    <form method="GET" action="/user/rankings">
+      <input type="submit" value="Display Author Rankings">
+    </form>
+    </td>
+    {%if user == "Admin" %}
+    <td>
+    <form method="GET" action="/admin/papers">
+      <input type="submit" value="Paper Management">
+    </form>
+    </td>
+    <td>
+    <form method="GET" action="/admin/topics">
+      <input type="submit" value="Topic Management">
+    </form>
+    </td>
+    <td>
+    <form method="GET" action="/admin/authors">
+      <input type="submit" value="Author Management">
+    </form>
+    </td>
+    <td>
+    <form method="GET" action="/user/home">
+      <input type="submit" value="User Homepage">
+    </form>
+    </td>
+    {% else %}
+    <td>
+    <form method="GET" action="/admin/home">
+      <input type="submit" value="Admin Homepage">
+    </form>
+    </td>
+    {% endif %}
+</tr>
+  </body>
+</html>

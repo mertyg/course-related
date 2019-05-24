@@ -1,0 +1,55 @@
+<html>
+<head>
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+  <body>
+    <h1>Topics</h1>
+    <table>
+        <tr>
+            <td>
+                TopicID
+            </td>
+            <td>
+                Name
+            </td>
+            <td>
+                Result
+            </td>
+            <td>
+                SOTA Paper
+            </td>
+        </tr>
+      {% for topic in topics %}
+        <tr>
+            <td>
+                {{topic[0]}}
+            </td>
+          <td>
+            {{topic[1]}}
+          </td>
+          <td>
+            {{topic[2]}}
+        </td>
+        <td>
+            {{topic[3]}}
+        </td>
+        <td>
+        <form method="POST" action="/user/topics">
+      <input type="hidden" name="topic_id" value="{{topic[0]}}">
+      <input type="submit" value="Display Papers">
+    </form>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <td>
+    <form method="GET" action="/user/home">
+      <input type="submit" value="Back to homepage">
+    </form>
+    </td>
+  </body>
+</html>

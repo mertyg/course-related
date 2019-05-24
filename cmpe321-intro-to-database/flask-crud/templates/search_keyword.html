@@ -1,0 +1,71 @@
+<html>
+<head>
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+  <body>
+    <h1>{{title}}</h1>
+        <form method="POST" action="/user/search_keyword">
+        Type a keyword <input type="text" name = "keyword">
+        <input type="submit" value="Search">
+        </form>
+        {%if papers != None %}
+        <table>
+        <tr>
+            {% for paper in papers %}
+            <td>
+                PaperID
+            </td>
+            <td>
+                Title
+            </td>
+            <td>
+                Abstract
+            </td>
+            <td>
+                Result
+            </td>
+            <td>
+                Topics
+            </td>
+            <td>
+                Authors
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                {{paper[0]}}
+            </td>
+          <td>
+            {{paper[1]}}
+          </td>
+          <td>
+            {{paper[2]}}
+        </td>
+        <td>
+            {{paper[3]}}
+        </td>
+        <td>
+            {{paper[4]}}
+        </td>
+        <td>
+            {{paper[5]}}
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <form method="GET" action="/user/search_keyword">
+      <input type="submit" value="Clear search result">
+    </form>
+        {% endif %}
+    <td>
+    <form method="GET" action="/user/home">
+      <input type="submit" value="Back to homepage">
+    </form>
+    </td>
+  </body>
+</html>

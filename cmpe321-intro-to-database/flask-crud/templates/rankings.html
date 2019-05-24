@@ -1,0 +1,55 @@
+<html>
+<head>
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+  <body>
+    <h1>Author Rankings</h1>
+    <table>
+        <tr>
+            <td>
+                AuthorID
+            </td>
+            <td>
+                First Name
+            </td>
+            <td>
+                Last Name
+            </td>
+            <td>
+                Number of SOTA Results
+            </td>
+        </tr>
+      {% for author in authors %}
+        <tr>
+            <td>
+                {{author[0]}}
+            </td>
+          <td>
+            {{author[1]}}
+          </td>
+          <td>
+            {{author[2]}}
+        </td>
+        <td>
+            {{author[3]}}
+        </td>
+        <td>
+        <form method="POST" action="/user/authors">
+      <input type="hidden" name="author_id" value="{{author[0]}}">
+      <input type="submit" value="Display Papers">
+    </form>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+        <td>
+    <form method="GET" action="/user/home">
+      <input type="submit" value="Back to homepage">
+    </form>
+    </td>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+<head>
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+  <body>
+    <h1>Topics</h1>
+    <table>
+        <tr>
+            <td>
+                TopicID
+            </td>
+            <td>
+                Name
+            </td>
+            <td>
+                Result
+            </td>
+            <td>
+                SOTA Paper
+            </td>
+        </tr>
+      {% for topic in topics %}
+        <tr>
+            <td>
+                {{topic[0]}}
+            </td>
+          <td>
+            {{topic[1]}}
+          </td>
+          <td>
+            {{topic[2]}}
+        </td>
+        <td>
+            {{topic[3]}}
+        </td>
+        <td>
+        <form method="POST" action="/admin/topics">
+            <input type="hidden" name="type" value=DELETE>
+            <input type="hidden" name="topic_id" value="{{topic[0]}}">
+            <input type="submit" value="Delete Topic">
+    </form>
+        </td>
+        </tr>
+        <tr>
+            <form method="POST" action="/admin/topics">
+                <input type="hidden" name="type" value=UPDATE>
+                <input type="hidden" name="topic_id" value="{{topic[0]}}">
+            <td>
+                Update {{topic[0]}} with: 
+            </td>
+          <td>
+            <input type="text" required name = "name">
+          </td>
+          <td>
+            
+        </td>
+        <td>
+            
+        </td>
+        <td>      
+            <input type="submit" value="Update Topic">
+    </form>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>Add a Topic: (SOTA Result will be NULL by default)</h1>
+<form method="POST" action="/admin/topics">
+    <input type="hidden" name="type" value=POST>
+  <table>
+    <tr>
+      <td align="right">Topic Name: </td>
+      <td align="left"><input type="text" required name = "name"></td>
+    </tr>
+    <tr>
+        <td align="right">All required</td>
+        <td align="left"><input type="submit" value="Add"></td>
+    </tr>
+  </table>
+</form>
+
+    <td>
+    <form method="GET" action="/admin/home">
+      <input type="submit" value="Back to homepage">
+    </form>
+    </td>
+  </body>
+</html>
